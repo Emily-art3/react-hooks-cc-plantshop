@@ -13,15 +13,8 @@ function App() {
   }, []);
   return (
     <div className="app">
-      <Header Plantsy/>
-      <PlantPage />
-      {plants.map(plant => (
-          <li key={plant.id}>
-            <img src={plant.image} alt={plant.name} />
-            <p>{plant.name}</p>
-            <p>${plant.price}</p>
-          </li>
-        ))}
+      <Header />
+      <PlantPage plants={plants} />
     </div>
   );
 }
