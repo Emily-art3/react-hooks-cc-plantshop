@@ -1,49 +1,83 @@
-# Phase 2 Code Challenge: Plantsy
+
+---
+# Plantsy - Phase 2 Code Challenge
+
+Welcome to **Plantsy**! This is the admin interface for a plant store where users can view, add, update, and manage a collection of plants.
 
 ## Demo
 
-Use this gif as an example of how the app should work.
+Below is a demonstration of how the app should work:
 
 ![Demo GIF](https://curriculum-content.s3.amazonaws.com/phase-2/react-hooks-mock-code-challenge-plantshop/plantsy_demo.gif)
 
-## Instructions
+---
 
-Welcome to Plantsy! You've been tasked with building out some features for the
-admin side of a plant store. The designers have put together the components and
-CSS. Now it's up to you to bring the features to life by adding stateful logic
-as well as persisting data to the backend via our API.
+## Project Overview
 
-Your job will be to make our app work according to the user stories you will
-find the [Core Deliverables](#Core-Deliverables) section.
+Plantsy is a React application with backend API integration that allows users to manage plant inventory. Users can:
+- View a list of plants.
+- Add new plants to the collection.
+- Mark plants as "sold out."
+- Filter plants by name in a search bar.
 
-## Setup
+Advanced functionality includes updating the price of a plant and deleting plants from the inventory.
 
-1. Run `npm install` in your terminal.
-2. Run `npm run server`. This will run your backend on port `6001`.
-3. In a new terminal, run `npm start`.
+---
 
-Make sure to open [http://localhost:6001/plants](http://localhost:6001/plants)
-in the browser to verify that your backend is working before you proceed!
+## Setup Instructions
 
-## Endpoints
+To set up and run the project locally, follow these steps:
 
-The base URL for your backend is: `http://localhost:6001`
+1. **Install dependencies**: Run `npm install` in your terminal to install all necessary packages.
+2. **Start the backend server**: Run `npm run server`. The backend will be running on port `6001`.
+3. **Start the frontend**: In a new terminal, run `npm start` to start the React application.
 
-## Core Deliverables
+### Verifying Backend Setup
 
-As a user:
+Before proceeding, ensure the backend is running by visiting [http://localhost:6001/plants](http://localhost:6001/plants) in your browser. You should see a JSON response with plant data.
 
-1. When the app starts, I can see all plants.
-2. I can add a new plant to the page by submitting the form.
-3. I can mark a plant as "sold out".
-4. I can search for plants by their name and see a filtered list of plants.
+---
 
-### Endpoints for Core Deliverables
+## Usage Instructions
 
-#### GET /plants
+### Core Features
 
-Example Response:
+1. **View All Plants**: When the app starts, it automatically fetches and displays a list of all plants from the backend.
 
+2. **Add a New Plant**: 
+   - Use the form provided to add a new plant by entering its name, image URL, and price.
+   - Click "Add Plant" to submit. The new plant will appear in the list without needing a page refresh.
+
+3. **Mark a Plant as Sold Out**:
+   - Each plant card has a button to toggle its "In Stock" or "Sold Out" status.
+
+4. **Search for Plants**:
+   - Use the search bar to filter plants by name. The displayed plant list will update in real-time as you type.
+
+### Advanced Features
+
+1. **Update Plant Price**:
+   - Click on the price of a plant to edit it.
+   - Enter the new price and submit to update it in the backend. The new price will persist on page refresh.
+
+2. **Delete a Plant**:
+   - Each plant card has a delete button to remove the plant from the inventory. The deletion persists on refresh.
+
+---
+
+## API Documentation
+
+### Base URL
+
+The backend API runs on `http://localhost:6001`.
+
+### Core Endpoints
+
+#### GET `/plants`
+
+Fetches all plants.
+
+**Example Response**:
 ```json
 [
   {
@@ -63,88 +97,85 @@ Example Response:
 
 #### POST `/plants`
 
-Required Headers:
+Adds a new plant to the backend.
 
-```js
-{
-  "Content-Type": "application/json"
-}
-```
+- **Headers**: `Content-Type: application/json`
+- **Request Body**:
+  ```json
+  {
+    "name": "string",
+    "image": "string",
+    "price": number
+  }
+  ```
+- **Example Response**:
+  ```json
+  {
+    "id": 1,
+    "name": "Aloe",
+    "image": "./images/aloe.jpg",
+    "price": 15.99
+  }
+  ```
 
-Request Object:
+### Advanced Endpoints
 
-```json
-{
-  "name": "string",
-  "image": "string",
-  "price": number
-}
-```
+#### PATCH `/plants/:id`
 
-Example Response:
+Updates the price of a specific plant.
 
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 15.99
-}
-```
+- **Headers**: `Content-Type: application/json`
+- **Request Body**:
+  ```json
+  {
+    "price": number
+  }
+  ```
+- **Example Response**:
+  ```json
+  {
+    "id": 1,
+    "name": "Aloe",
+    "image": "./images/aloe.jpg",
+    "price": 16.99
+  }
+  ```
 
-## Advanced Deliverables
+#### DELETE `/plants/:id`
 
-These deliverables are not required to pass the code challenge, but if you have
-the extra time, or even after the code challenge, they are a great way to
-stretch your skills.
+Deletes a plant from the backend.
 
-You'll have to add additional elements for these features. Feel free to style
-them however you see fit!
+- **Example Response**:
+  ```json
+  {}
+  ```
 
-> Note: If you are going to attempt these advanced deliverables, please be sure
-> to have a working commit with all the Core Deliverables first!
+---
 
-As a user:
+## Error Handling
 
-1. I can update the price of a plant and still see the updated price after
-   refreshing the page.
-2. I can delete a plant and it is still gone when I refresh the page.
+The application includes error handling for backend requests:
+- Users will see an error message if a request fails (e.g., when the server is down).
+- The app will continue to function smoothly by logging errors to the console and displaying alerts where necessary.
 
-### Endpoints for Advanced Deliverables
+---
 
-#### PATCH /plants/:id
+## Deployment
 
-Required Headers:
+To deploy the app:
+1. Choose a hosting platform like [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/).
+2. Deploy both the backend (using services like Heroku or Railway) and frontend (on Netlify or Vercel).
+3. Update the backend URL in your frontend code if it changes upon deployment.
+4. Include the live link below once deployed.
 
-```js
-{
-  "Content-Type": "application/json"
-}
-```
+### Live Demo
+https://react-hooks-cc-plantshopem.netlify.app/
 
-Request Object:
+---
 
-```json
-{
-  "price": number
-}
-```
+## Additional Notes
 
-Example Response:
+- **Dependencies**: Ensure all dependencies are installed, particularly React and any packages required for the backend.
+- **File Structure**: The application follows a modular structure for components, organized for maintainability.
 
-```json
-{
-  "id": 1,
-  "name": "Aloe",
-  "image": "./images/aloe.jpg",
-  "price": 16.99
-}
-```
-
-#### DELETE /plants/:id
-
-Example Response:
-
-```json
-{}
-```
+---
